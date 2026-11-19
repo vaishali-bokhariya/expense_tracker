@@ -41,9 +41,9 @@ function ExpenseList({expenses}) {
             <td>{expense.date}</td>
             <td>{expense.category}</td>
             <td className="table-action">
-              <butoon className="btn-delete">Delete</butoon>
-              <butoon className="btn-edit">Edit</butoon>
-              <butoon className="btn-readmore">View</butoon>
+              <button className="btn-delete">Delete</button>
+              <button className="btn-edit">Edit</button>
+              <button className="btn-readmore">View</button>
             </td>
           </tr>
           ))}
