@@ -1,0 +1,167 @@
+.ExpenseList{
+    width: 75%;
+    margin: 40px auto;
+    background-color: #ffffff;
+    color: #2b2a2a;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0, 0, 0.08);
+}
+
+/* header +search*/
+.list-search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.list-search h1{
+    color: #2b2a2a;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.list-help{
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/*search & filter*/
+.list-search select,
+.list-search input{
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-left: 10px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2b2a2a;
+
+}
+
+.list-search select:focus,
+.list-search input:focus{
+    border-color: #5a7acd;
+    box-shadow: 0 0 0 2px rgba(90, 122, 205,0.15);
+}
+
+/*table*/
+.ExpenseList table{
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/*table header*/
+.ExpenseList th{
+    background-color: #5a7acd;
+    color: #ffffff;
+    padding: 12px;
+    text-align: left;
+    font-weight: 500;
+}
+
+/*table rows*/
+.ExpenseList td{
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #2b2a2a;
+    background-color: #ffffff;
+}
+
+/*Table hover Effect*/
+.ExpenseList tbody tr:hover td{
+    background-color: #f4f6f8;
+}
+
+/*Action Buttons*/
+.table-action{
+    display: flex;
+    flex-wrap: wrap;
+    gap:6px;
+}
+
+/*Edit Button*/
+.btn-edit{
+    background-color: #feb05d;
+    color: #2b2a2a;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-edit:hover{
+    background-color: #fda737;
+    transform: translateY(-2px);
+}
+
+/*Delete Button*/
+.btn-delete{
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-delete:hover{
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/*View Button*/
+.btn-readmore{
+    background: linear-gradient(135deg,#5a7acd,#7b98ff);
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-readmore:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(90, 122,205, 0.4);
+}
+
+/*Total Amount*/
+.expense-total td{
+    font-weight: 600;
+    text-align: right;
+    background-color: #f4f6f8;
+    color: #2b2a2a;
+}
+
+/*Empty State*/
+.no-data{
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+/*Loading and Error Message*/
+.items-message{
+    padding: 12px;
+    text-align: center;
+    color: #5a7acd;
+}
+
+.items-error{
+    color: #e74c3c;
+}
+
+
+
