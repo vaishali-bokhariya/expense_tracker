@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import "../styles/ExpenseList.css";
 import ConfirmationModal from "./ConfirmationModal";
+import EditModel from "./EditModel";
 function ExpenseList() {
   const [expenses, setExpenses] = useState([]);
+  const [deleteExpense, setDeleteExpense] = useState(null);
+  const [openModel, setOpenModel] = useState(false);
+  const [editId, setEditId] = useState(null);
+
   const loadExpenses = () => {
     const savedExpenses = JSON.parse(localStorage.getItem("expenses") || "[]");
     setExpenses(savedExpenses);
@@ -17,6 +22,21 @@ function ExpenseList() {
     (sum, item) => sum + Number(item.amount),
     0,
   );
+  //delete expense
+  const handleDelete = (id) => {
+    const updateExpenses = expenses.filter((item) => item.id !== id);
+
+    localStorage.setItem("expenses", JSON.stringify(updateExpenses));
+
+    setExpenses(updateExpenses);
+    setDeleteExpense(null);
+  };
+
+  const editHandler = (id) => {
+    setEditId(id);
+    setOpenModel(true);
+  };
+
   return (
     <>
       <div className="ExpenseList">
@@ -60,8 +80,21 @@ function ExpenseList() {
                   <td>{expense.date}</td>
                   <td>{expense.category}</td>
                   <td className="table-action">
-                    <button className="btn-delete">Delete</button>
-                    <button className="btn-edit">Edit</button>
+                    <button
+                      type="button"
+                      className="btn-delete"
+                      onClick={() => setDeleteExpense(expense)}
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                      onClick={() => editHandler(expense.id)}
+                      className="btn-edit"
+                    >
+                      Edit
+                    </button>
+
                     <button className="btn-readmore">View</button>
                   </td>
                 </tr>
@@ -80,14 +113,21 @@ function ExpenseList() {
           </tbody>
         </table>
       </div>
-      <ConfirmationModal
-        title="Delete Expense"
-        message={"Are you sure you want to delete this expense "}
-        confirmText="Delete"
-        cancelText="Cancel"
-        onCancel={() => {}}
-        onConfirm={() => {}}
-      />
+      {/* Delete confirmation Model*/}
+      {deleteExpense !== null && (
+        <ConfirmationModal
+          title="Delete Expense"
+          message="Are you sure you want to delete this expense "
+          confirmText="Delete"
+          cancelText="Cancel"
+          onCancel={() => setDeleteExpense(null)}
+          onConfirm={() => handleDelete(deleteExpense.id)}
+        />
+      )}
+      {openModel && editId !== null &&(
+          <EditModel />
+      )}
+      
     </>
   );
 }
