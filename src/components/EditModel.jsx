@@ -1,30 +1,79 @@
+import { useEffect, useState } from "react";
 import "../styles/EditModel.css";
 
-function EditModel() {
+function EditModel({ editId, onClose, onUpdate }) {
+  const [FormData, setFormData] = useState({
+    id: editId,
+    amount: null,
+    description: "",
+    category: "",
+  });
+
+  useEffect(() => {
+    const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+    const expense = expenses.find((item) => String(item.id) === String(editId));
+
+    if (expense) setFormData(expense);
+  }, [editId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "amount" && value !== "" ? Number(value) : value,
+    }));
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+    const updatedExpenses = expenses.map((item) =>
+      String(item.id) === String(editId) ? FormData : item
+    );
+
+    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+    onUpdate();
+    onClose();
+  };
+
   return (
     <div className="model">
       <div className="form-box">
-        <form>
+        <form onSubmit={handleUpdate}>
           <h1>Edit Expense</h1>
 
           <input
             type="number"
             name="amount"
-            defaultValue=""
-            placeholder="Amount"
+            placeholder="amount"
+            value={FormData.amount || ''}
+            onChange={handleChange}
+            required
           />
 
           <input
             type="text"
             name="description"
-            defaultValue=""
             placeholder="Description"
+            value={FormData.description}
+            onChange={handleChange}
+            required
           />
 
-          <input type="date" name="data" defaultValue="" />
+          <input
+            type="date" name="date" defaultValue=""
+            value={FormData.date}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="category">Category:</label>
-          <select id="category" name="category" defaultValue="">
+          <select id="category" name="category"
+            value={FormData.category}
+            onChange={handleChange}
+            defaultValue="">
             <option value="">Select Category</option>
             <option value="food">Food</option>
             <option value="shopping">shopping</option>
@@ -35,10 +84,10 @@ function EditModel() {
           </select>
 
           <div className="model-btn">
-            <button type="button" className="edit">
+            <button className="edit">
               update
             </button>
-            <button type="button" className="cancle">
+            <button className="cancle">
               Cancel
             </button>
           </div>

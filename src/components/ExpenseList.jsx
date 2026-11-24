@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import "../styles/ExpenseList.css";
 import ConfirmationModal from "./ConfirmationModal";
 import EditModel from "./EditModel";
+import { useNavigate } from "react-router-dom";
+
 function ExpenseList() {
   const [expenses, setExpenses] = useState([]);
   const [deleteExpense, setDeleteExpense] = useState(null);
   const [openModel, setOpenModel] = useState(false);
   const [editId, setEditId] = useState(null);
+  const navigate = useNavigate();
 
   const loadExpenses = () => {
     const savedExpenses = JSON.parse(localStorage.getItem("expenses") || "[]");
@@ -35,6 +38,10 @@ function ExpenseList() {
   const editHandler = (id) => {
     setEditId(id);
     setOpenModel(true);
+  };
+
+  const handleReadMore = (id) => {
+    navigate(`/expenseDetails/${id}`);
   };
 
   return (
@@ -95,7 +102,12 @@ function ExpenseList() {
                       Edit
                     </button>
 
-                    <button className="btn-readmore">View</button>
+                    <button
+                      className="btn-readmore"
+                      onClick={() => handleReadMore(expense.id)}
+                    >
+                      View
+                    </button>
                   </td>
                 </tr>
               ))
@@ -124,10 +136,13 @@ function ExpenseList() {
           onConfirm={() => handleDelete(deleteExpense.id)}
         />
       )}
-      {openModel && editId !== null &&(
-          <EditModel />
+      {openModel && editId !== null && (
+        <EditModel
+          editId={editId}
+          onClose={() => setOpenModel(false)}
+          onUpdate={loadExpenses}
+        />
       )}
-      
     </>
   );
 }
