@@ -55,6 +55,12 @@
     color: #2B2A2A;
 }
 
+/*active route*/
+.links.active{
+    background-color: #feb05d;
+    color: #2b2a2a;
+}
+
 .nav-actions
 {
     display: flex;

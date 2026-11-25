@@ -13,6 +13,7 @@ function EditModel({ editId, onClose, onUpdate }) {
     const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
     const expense = expenses.find((item) => String(item.id) === String(editId));
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (expense) setFormData(expense);
   }, [editId]);
 
