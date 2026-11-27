@@ -8,6 +8,11 @@
     box-shadow: 0 8px 20px rgba(0,0, 0, 0.08);
 }
 
+.ExpenseList.dark{
+    background-color: #374151;
+    color: #ffffff;
+}
+
 /* header +search*/
 .list-search{
     display: flex;
@@ -72,6 +77,20 @@
     border-bottom: 1px solid #eee;
     color: #2b2a2a;
     background-color: #ffffff;
+}
+
+.ExpenseList.dark .list-search h1,
+.ExpenseList.dark td{
+    color: #ffffff;
+}
+
+.ExpenseList.dark td{
+    background-color: #374151;
+    border-bottom-color: #4b5563;
+}
+
+.ExpenseList.dark tr:hover td{
+    background-color: #4b5563;
 }
 
 /*Table hover Effect*/

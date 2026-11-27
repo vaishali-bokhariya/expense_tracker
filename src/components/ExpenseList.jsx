@@ -3,8 +3,10 @@ import "../styles/ExpenseList.css";
 import ConfirmationModal from "./ConfirmationModal";
 import EditModel from "./EditModel";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 function ExpenseList() {
+  const { theme } = useTheme();
   const [expenses, setExpenses] = useState([]);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,7 +44,7 @@ function ExpenseList() {
     setFilter(e.target.value);
   };
 
-  const handleSearchChange = (e) =>{
+  const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
@@ -67,7 +69,7 @@ function ExpenseList() {
 
   return (
     <>
-      <div className="ExpenseList">
+      <div className={`ExpenseList ${theme}`}>
         <div className="list-search">
           <div>
             <h1>your expense</h1>
@@ -86,9 +88,11 @@ function ExpenseList() {
               <option value="phoneBill">Phone Bill</option>
             </select>
 
-            <input type="search" placeholder="Search expense..." 
-            value={searchTerm}
-            onChange={handleSearchChange}
+            <input
+              type="search"
+              placeholder="Search expense..."
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
         </div>
